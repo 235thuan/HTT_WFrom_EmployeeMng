@@ -158,6 +158,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTaikhoan";
             this.Text = "Quản lý tài khoản";
+            this.Load += new System.EventHandler(this.frmTaikhoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTk)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

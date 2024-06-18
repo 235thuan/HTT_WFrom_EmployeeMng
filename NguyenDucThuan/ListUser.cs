@@ -33,5 +33,48 @@ namespace NguyenDucThuan
             listUserA = new List<User>();
             listUserA.Add(new User("admin", "admin"));
         }
+        public List<User> GetUsers()
+        {
+            return listUserA;
+        }
+        public void CreateUser(string username, string password)
+        {
+            User newUser = new User(username, password);
+            listUserA.Add(newUser);
+            Console.WriteLine($"User '{username}' created successfully.");
+        }
+
+        public void UpdatePassword(string username, string newPassword)
+        {
+            User userToUpdate = FindUserByUsername(username);
+            if (userToUpdate != null)
+            {
+                userToUpdate.Password = newPassword;
+                Console.WriteLine($"Password updated for user '{username}'.");
+            }
+            else
+            {
+                Console.WriteLine($"User '{username}' not found.");
+            }
+        }
+
+        // Method to delete a user
+        public void DeleteUser(string username)
+        {
+            User userToDelete = FindUserByUsername(username);
+            if (userToDelete != null)
+            {
+                listUserA.Remove(userToDelete);
+                Console.WriteLine($"User '{username}' deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"User '{username}' not found.");
+            }
+        }
+        private User FindUserByUsername(string username)
+        {
+            return listUserA.Find(u => u.Username == username);
+        }
     }
 }

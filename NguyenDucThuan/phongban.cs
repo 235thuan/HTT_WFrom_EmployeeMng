@@ -106,10 +106,9 @@ namespace NguyenDucThuan
 
         private void lbDspb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbDspb.SelectedIndex != -1) // Ensure an item is selected
+            if (lbDspb.SelectedIndex != -1) 
             {
                 Department selectedDepartment = (Department)lbDspb.SelectedItem;
-                // Update TextBox with selected department name
                 txtTenpb.Text = selectedDepartment.DepartmentName;
             }
         }

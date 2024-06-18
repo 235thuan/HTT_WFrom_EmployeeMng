@@ -8,8 +8,10 @@ namespace NguyenDucThuan
 {
     public class User
     {
-        private string userName;
-        private string password;
+        private string typeOfAccount { get; set; }
+        private string userName { get; set; }
+        private string password { get; set; }
+
         public string Username
         {
             get { return userName; }
@@ -18,7 +20,7 @@ namespace NguyenDucThuan
         public string Password
         {
             get { return password; }
-            set { userName = value; }
+            set { password = value; }
         }
 
         public User(string username, string password)
