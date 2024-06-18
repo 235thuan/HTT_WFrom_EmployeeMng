@@ -39,6 +39,9 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.dtgvTk = new System.Windows.Forms.DataGridView();
+            this.TenTk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ltk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTk)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +89,6 @@
             // 
             // cbxLoaitk
             // 
-            this.cbxLoaitk.Enabled = false;
             this.cbxLoaitk.FormattingEnabled = true;
             this.cbxLoaitk.Location = new System.Drawing.Point(183, 191);
             this.cbxLoaitk.Name = "cbxLoaitk";
@@ -101,6 +103,7 @@
             this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
@@ -110,6 +113,7 @@
             this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -119,6 +123,7 @@
             this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -133,10 +138,30 @@
             // dtgvTk
             // 
             this.dtgvTk.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvTk.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TenTk,
+            this.Mk,
+            this.Ltk});
             this.dtgvTk.Location = new System.Drawing.Point(509, 59);
             this.dtgvTk.Name = "dtgvTk";
             this.dtgvTk.Size = new System.Drawing.Size(548, 315);
             this.dtgvTk.TabIndex = 10;
+            this.dtgvTk.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvTk_CellClick);
+            // 
+            // TenTk
+            // 
+            this.TenTk.HeaderText = "Tên Tài Khoản";
+            this.TenTk.Name = "TenTk";
+            // 
+            // Mk
+            // 
+            this.Mk.HeaderText = "Mật Khẩu";
+            this.Mk.Name = "Mk";
+            // 
+            // Ltk
+            // 
+            this.Ltk.HeaderText = "Loại Tài Khoản";
+            this.Ltk.Name = "Ltk";
             // 
             // frmTaikhoan
             // 
@@ -178,5 +203,8 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.DataGridView dtgvTk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenTk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ltk;
     }
 }

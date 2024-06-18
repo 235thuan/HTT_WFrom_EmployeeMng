@@ -197,5 +197,10 @@ namespace NguyenDucThuan
                 MessageBox.Show("No matching record found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void dtgvDsnv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -38,5 +38,10 @@ namespace NguyenDucThuan
             cbxTrangthai.DataSource = Const.listTrangthai;
             LoadInfor();
         }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

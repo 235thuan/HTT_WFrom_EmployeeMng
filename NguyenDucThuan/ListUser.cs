@@ -43,6 +43,12 @@ namespace NguyenDucThuan
             listUserA.Add(newUser);
             Console.WriteLine($"User '{username}' created successfully.");
         }
+        public void CreateUserWithType(string username, string password,string typeOfAccount)
+        {
+            User newUser = new User(username, password,typeOfAccount);
+            listUserA.Add(newUser);
+            Console.WriteLine($"User '{username}' created successfully.");
+        }
 
         public void UpdatePassword(string username, string newPassword)
         {
@@ -57,6 +63,22 @@ namespace NguyenDucThuan
                 Console.WriteLine($"User '{username}' not found.");
             }
         }
+        public void UpdatePasswordWithType(string username, string newPassword,string newTypeOfAccount)
+        {
+            User userToUpdate = FindUserByUsername(username);
+            if (userToUpdate != null)
+            {
+                userToUpdate.Password = newPassword;
+                userToUpdate.TypeOfAccount = newTypeOfAccount;
+                Console.WriteLine($"updated for user '{username}'.");
+           
+            }
+            else
+            {
+                Console.WriteLine($"User '{username}' not found.");
+            }
+        }
+
 
         // Method to delete a user
         public void DeleteUser(string username)
