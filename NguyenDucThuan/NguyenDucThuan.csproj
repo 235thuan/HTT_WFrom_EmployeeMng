@@ -60,7 +60,9 @@
     <Compile Include="dangnhap.Designer.cs">
       <DependentUpon>dangnhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Department.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="ListDepartment.cs" />
     <Compile Include="ListEmployee.cs" />
     <Compile Include="ListUser.cs" />
     <Compile Include="phongban.cs">

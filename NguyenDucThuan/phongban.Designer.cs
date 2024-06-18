@@ -44,7 +44,7 @@
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.button1_Click);
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // txtTenpb
             // 
@@ -61,6 +61,7 @@
             this.btnCapnhat.TabIndex = 2;
             this.btnCapnhat.Text = "Cập nhật";
             this.btnCapnhat.UseVisualStyleBackColor = true;
+            this.btnCapnhat.Click += new System.EventHandler(this.btnCapnhat_Click);
             // 
             // lbDspb
             // 
@@ -70,6 +71,7 @@
             this.lbDspb.Name = "lbDspb";
             this.lbDspb.Size = new System.Drawing.Size(437, 194);
             this.lbDspb.TabIndex = 3;
+            this.lbDspb.SelectedIndexChanged += new System.EventHandler(this.lbDspb_SelectedIndexChanged);
             // 
             // btnXoa
             // 
@@ -79,6 +81,7 @@
             this.btnXoa.TabIndex = 4;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -88,6 +91,7 @@
             this.btnThoat.TabIndex = 5;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // frmPhongban
             // 
@@ -101,9 +105,10 @@
             this.Controls.Add(this.txtTenpb);
             this.Controls.Add(this.btnThem);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmPhongban";
             this.Text = "Phòng Ban";
+            this.Load += new System.EventHandler(this.frmPhongban_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
