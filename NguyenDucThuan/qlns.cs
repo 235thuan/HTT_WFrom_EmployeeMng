@@ -39,7 +39,6 @@ namespace NguyenDucThuan
         private void nhânSựToolStripMenuItem_Click(object sender, EventArgs e)
         {
             btnHuy.Enabled = true;
-            btnLuu.Enabled = true;
             btnSua.Enabled = true;
             btnThem.Enabled = true;
             btnXoa.Enabled = true;
