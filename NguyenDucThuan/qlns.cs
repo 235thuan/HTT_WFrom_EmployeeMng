@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace NguyenDucThuan
             dtgvDsnv.Visible = true;
             btnTimkiem.Enabled = true;
             txtHoten.Enabled = true;
-            txtManv .Enabled = true;
+            txtManv.Enabled = true;
             dtpNgaysinh.Enabled = true;
             cbxGioitinh.Enabled = true;
         }
@@ -59,9 +60,9 @@ namespace NguyenDucThuan
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            frmCsttnv f = new frmCsttnv();
-            f.FormClosed += F_formClosed1;
-            f.ShowDialog();
+            string manv = txtManv.Text;
+            frmCsttnv updateForm = new frmCsttnv(manv, this);
+            updateForm.ShowDialog();
         }
 
         private void F_formClosed1(object sender, FormClosedEventArgs e)
@@ -89,19 +90,39 @@ namespace NguyenDucThuan
             LoadListEmployee();
         }
 
-        private void LoadListEmployee()
+        public void LoadListEmployee()
         {
-            dtgvDsnv.Rows.Clear();
-            foreach (var item in ListEmployee.Instance.Listempoy)
+
+            try
             {
-                dtgvDsnv.Rows.Add(item.MaNV, item.HoVaTen, item.NgaySinh.ToString("dd/MM/yyyy"),
-                    item.GioiTinh, item.PhongBan, item.ChucVu, item.TrangThai);
+                using (SqlConnection con = connectDB())
+                {
+                    con.Open();
+                    string query = "SELECT manv, hotennv, phongban, hesoluong, chucvu FROM nhanvien";
+                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dtgvDsnv.DataSource = dt;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            //dtgvDsnv.Rows.Clear();
+            //foreach (var item in ListEmployee.Instance.Listempoy)
+            //{
+            //    dtgvDsnv.Rows.Add(item.MaNV, item.HoVaTen, item.NgaySinh.ToString("dd/MM/yyyy"),
+            //        item.GioiTinh, item.PhongBan, item.ChucVu, item.TrangThai);
+            //}
         }
 
         private void frmQuanlynv_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'wF_QL_nhanvienDataSet.nhanvien' table. You can move, or remove it, as needed.
             LoadListEmployee();
+            this.nhanvienTableAdapter.Fill(this.wF_QL_nhanvienDataSet.nhanvien);
+           
             cbxGioitinh.DataSource = Const.listSex;
         }
 
@@ -127,17 +148,55 @@ namespace NguyenDucThuan
                 dtpNgaysinh.Value = dateValue;
             }
             cbxGioitinh.SelectedItem = row.Cells[3].Value.ToString();
+
+
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (index < 0 || index >= ListEmployee.Instance.Listempoy.Count)
+            //if (index < 0 || index >= ListEmployee.Instance.Listempoy.Count)
+            //{
+            //    MessageBox.Show("Hay chon 1 ban ghi");
+            //    return;
+            //}
+            //ListEmployee.Instance.Listempoy.RemoveAt(index);
+            //LoadListEmployee();
+            string manvToDelete = txtManv.Text.Trim();
+            if (!string.IsNullOrEmpty(manvToDelete))
             {
-                MessageBox.Show("Hay chon 1 ban ghi");
-                return;
+                if (MessageBox.Show("Are you sure you want to delete this employee?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (SqlConnection con = connectDB())
+                        {
+                            con.Open();
+                            using (SqlCommand cmd = new SqlCommand("DELETE FROM nhanvien WHERE manv = @manv", con))
+                            {
+                                cmd.Parameters.AddWithValue("@manv", manvToDelete);
+                                int rowsAffected = cmd.ExecuteNonQuery();
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Employee deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    LoadListEmployee(); 
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No employee found with the specified ID.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
-            ListEmployee.Instance.Listempoy.RemoveAt(index);
-            LoadListEmployee();
+            else
+            {
+                MessageBox.Show("Please select an employee to delete.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnTimkiem_Click(object sender, EventArgs e)
@@ -198,9 +257,17 @@ namespace NguyenDucThuan
             }
         }
 
-        private void dtgvDsnv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+       
+        private SqlConnection connectDB()
         {
+            String strCon = "Server=DESKTOP-E43PI42\\MSSQLSERVER2017;Database=WF_QL_nhanvien;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
+            SqlConnection con = new SqlConnection(strCon);
+            return con;
+        }
 
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

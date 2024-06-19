@@ -22,5 +22,16 @@ namespace NguyenDucThuan.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-E43PI42\\MSSQLSERVER2017;Initial Catalog=WF_QL_nhanvien;Integr" +
+            "ated Security=True;TrustServerCertificate=True")]
+        public string WF_QL_nhanvienConnectionString {
+            get {
+                return ((string)(this["WF_QL_nhanvienConnectionString"]));
+            }
+        }
     }
 }
